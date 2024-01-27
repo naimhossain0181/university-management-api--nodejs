@@ -11,22 +11,28 @@ export const signInRequired = async (req,res,next)=>{
         else{
             const decoded=jwt.verify(token,process.env.PrivateKey)
             const user=await UserSchema.findById(decoded._id,{'password':0})
-            console.log(user)
             req.user=user
+            console.log(user)
             next()
         }
     }
     catch (err) {
-        return res.status(501).json({status:"token has been expired" ,message:err})
+        return res.status(501).json({status:"token has been expired!" ,message:err})
     }
 
 }
 export const allowTo = (...roles)=>{
     return async (req,res,next)=>{
-        if (!roles.includes(req.user.role)){
-            return res.status(401).json({status:'Failed! You are Not allow to this route' })
+        try {
+            if (!roles.includes(req.user===null || req.user.role)){
+                return res.status(401).json({status:'Failed! You are Not allow to this route' })
+            }
+            next()
         }
-        next()
+        catch (err) {
+            return res.status(501).json({status:"Login and Try again" ,message:err})
+        }
+
     }
 }
 

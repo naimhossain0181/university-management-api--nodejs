@@ -27,8 +27,8 @@ export const UserLogin = async (req,res)=>{
         else {
             const comparePassword=await bcypt.compare(password,user.password)
             if (user && comparePassword){
-                const {_id,firstName,lastName,email,role}=user
-                const token = await jwt.sign({_id,firstName,lastName,email,role},process.env.PrivateKey)
+                const {_id,email}=user
+                const token = await jwt.sign({_id,email},process.env.PrivateKey)
                 return res.status(200).json({status:"login successfully",token:token})
             }
             else {

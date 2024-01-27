@@ -8,7 +8,7 @@ export const CreateFeature=async (req,res)=>{
             title,
             desc,
             details,
-            author:"65b386f8fef88af4c46da2cc"
+            author:req.user._id
 
         })
         const data= await newFeatured.save()
