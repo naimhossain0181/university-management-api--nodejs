@@ -1,0 +1,13 @@
+# Dependency directories
+node_modules/
+
+# Editor-specific files
+.idea/
+.vscode/
+
+# Compiled output
+dist/
+build/
+
+# Environment variables
+.env
