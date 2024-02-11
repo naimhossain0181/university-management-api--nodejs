@@ -20,6 +20,9 @@ const FeatureSchema = new mongoose.Schema({
         url:{
             type:String,
             default:'https://wp-rocket.me/wp-content/uploads/1/What-is-WebP-and-how-to-use-this-image-format-in-WordPress.png'
+        },
+        publicID:{
+            type:String
         }
     },
     author:{

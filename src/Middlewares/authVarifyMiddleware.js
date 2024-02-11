@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
-import extractToken from "../utilitis/extractToken.js";
+import extractToken from "../utils/extractToken.js";
 import UserSchema from '../Model/userModel.js'
 export const signInRequired = async (req,res,next)=>{
     const token=await extractToken(req.header('Authorization')) //split bearer from Authorization token
@@ -12,7 +12,7 @@ export const signInRequired = async (req,res,next)=>{
             const decoded=jwt.verify(token,process.env.PrivateKey)
             const user=await UserSchema.findById(decoded._id,{'password':0})
             req.user=user
-            console.log(user)
+            // console.log(user)
             next()
         }
     }
